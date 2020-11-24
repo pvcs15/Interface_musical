@@ -25,6 +25,18 @@ const playOnce = () => {
   };  
   
   document.getElementById('message').innerText = '' + chords;
+// https://magenta.github.io/magenta-js/music/classes/_music_rnn_model_.musicrnn.html#continuesequence -> Documentação aqui do continueSequence;
+// Eu acho uma boa dar a opção pro usuário de quantos "chords" ele quer (basicamente os acordes que tem na tela pra ele botar)
+// Dar as opções de acordes pra ele não ter que digitar, já facilita pra quem não é músico feito a gente
+// Mexer nesse terceiro parametro, "temperature", quanto mais alto o valor mais "random" vai ser a música gerada (deve ser um input do usuário pra ele escolher esse nível que ele quer)
+// Dar a opção pro usuário escolher as duas primeiras linhas desse codigo, que é basicamente o tamanho da música, duração da batida, tem que ir testando pra ver o que cada um altera pra
+// jogar isso no front.
+//  Pode até ver como mudando os valores do "quantizationInfo" e "totalQuantizedSteps" da variável "seq", como isso altera o som.
+// O usuário tem poder apenas nos acordes que ele vai querer passar como input, então a gente deve dar a opção pra ele botar som de bateria, sons mais graves, mais agudos,
+// além de escolher o acorde, tem que ver os valores que vão ficar na variável "notes" do "seq". É lá que a gente consegue mudar o som e tipo de som do acorde, mudar o instrumento e tal
+// A ideia é a gente botar essas entradas pro usuário sem ele escolher de fato números, por exemplo:
+// no terceiro parametro do "continueSequence" que é a "temperature", poderia ser um slider saca? ao invés do cara escolher de fato o númeo "1.2", ele arrasta um slider pro lado que ele quer
+// é difícil de fazer isso no html? eu não faço ideia
   model.continueSequence(seq, STEPS_PER_PROG + (NUM_REPS-1)*STEPS_PER_PROG - 1, 0.9, chords)
     .then((contSeq) => {
       
